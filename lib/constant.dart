@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 // Strings URL
-const base_url = 'http://127.0.0.1:8000/api';
-const login_url = '$base_url/login/';
-const register_url = '$base_url/register/';
-const logout_url = "$base_url/logout/";
-const user_detail_url = "$base_url/user/";
+const baseUrl = 'http://192.168.0.108:80/api';
+const apiToken = 'base64:1hA0CRnnm5lka5NKzVSOYAb+btjEOQXD+B384ZxlAR4=';
+const loginUrl = '$baseUrl/login/';
+const registerUrl = '$baseUrl/register/';
+const logoutUrl = "$baseUrl/logout/";
+const userDetailUrl = "$baseUrl/user/";
 
 // Errores
 const somethingWentWrong = 'Ha occurido un error, de nuevo';
@@ -16,7 +17,7 @@ InputDecoration kInputDecoration(String label) {
   return InputDecoration(
       labelText: label,
       contentPadding: EdgeInsets.all(10),
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: Colors.black)));
 }
 

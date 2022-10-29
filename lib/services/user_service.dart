@@ -10,12 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<ApiResponse> login(String email, String password) async {
   ApiResponse apiResponse = ApiResponse();
   try {
-    final response = await http.post(Uri.parse(login_url),
+    final response = await http.post(Uri.parse(loginUrl),
         headers: {'Accept': 'application/json'},
         body: {'email': email, 'password': password});
 
     switch (response.statusCode) {
-      case 200:
+      case 201:
         apiResponse.data = User.fromJson(jsonDecode(response.body));
         break;
       case 422:
@@ -41,8 +41,8 @@ Future<ApiResponse> register(String nombre, String apellido, String telefono,
     String email, String password) async {
   ApiResponse apiResponse = ApiResponse();
   try {
-    final response = await http.post(Uri.parse(register_url), headers: {
-      'Accept': 'application/json'
+    final response = await http.post(Uri.parse(registerUrl), headers: {
+      'Accept': 'application/json',
     }, body: {
       'nombre': nombre,
       'apellido': apellido,
@@ -53,7 +53,7 @@ Future<ApiResponse> register(String nombre, String apellido, String telefono,
     });
 
     switch (response.statusCode) {
-      case 200:
+      case 201:
         apiResponse.data = User.fromJson(jsonDecode(response.body));
         break;
       case 422:
@@ -75,7 +75,7 @@ Future<ApiResponse> getUserDetail() async {
   ApiResponse apiResponse = ApiResponse();
   try {
     String token = await getToken();
-    final response = await http.get(Uri.parse(user_detail_url), headers: {
+    final response = await http.get(Uri.parse(userDetailUrl), headers: {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token'
     });

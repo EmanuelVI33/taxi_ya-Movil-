@@ -2,7 +2,7 @@ class User {
   int? id;
   String? nombre;
   String? apellido;
-  int? telefono;
+  String? telefono;
   String? email;
   String? password;
   String? token;
