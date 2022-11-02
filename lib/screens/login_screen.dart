@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxi_ya/models/api_response.dart';
 import 'package:taxi_ya/models/user.dart';
+import 'package:taxi_ya/screens/home_screen.dart';
+import 'package:taxi_ya/screens/user/user_screen.dart';
 import 'package:taxi_ya/services/user_service.dart';
 import 'package:taxi_ya/ui/input_decorations.dart';
 import 'package:taxi_ya/widgets/widgets.dart';
@@ -37,7 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setString('token', user.token ?? '');
     await pref.setInt('userId', user.id ?? 0);
-    Navigator.of(context).pushNamed('home');
+
+    // ignore: use_build_context_synchronously
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
 
   @override

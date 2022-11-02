@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Strings URL
-const baseUrl = 'http://192.168.0.108:80/api';
+const baseUrl = 'https://julicosuarez.ga/api';
 const apiToken = 'base64:1hA0CRnnm5lka5NKzVSOYAb+btjEOQXD+B384ZxlAR4=';
 const loginUrl = '$baseUrl/login/';
 const registerUrl = '$baseUrl/register/';
@@ -46,14 +46,17 @@ Row KLoginRegisterHint(String text, String label, Function onTab) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text(text),
+      Text(
+        text,
+        style: TextStyle(fontSize: 18),
+      ),
       const SizedBox(
         width: 10,
       ),
       GestureDetector(
         child: Text(
           label,
-          style: const TextStyle(color: Colors.blue),
+          style: const TextStyle(color: Colors.blue, fontSize: 22),
         ),
         onTap: () => onTab(),
       )

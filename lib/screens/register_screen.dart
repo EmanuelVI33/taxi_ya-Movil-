@@ -44,7 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setString('token', user.token ?? '');
     await pref.setInt('userId', user.id ?? 0);
-    Navigator.of(context).pushNamed('home');
+    Navigator.pushNamed(context, 'home');
   }
 
   @override

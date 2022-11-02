@@ -15,6 +15,9 @@ Future<ApiResponse> login(String email, String password) async {
         body: {'email': email, 'password': password});
 
     switch (response.statusCode) {
+      case 200:
+        apiResponse.data = User.fromJson(jsonDecode(response.body));
+        break;
       case 201:
         apiResponse.data = User.fromJson(jsonDecode(response.body));
         break;
@@ -145,6 +148,11 @@ Future<String> getToken() async {
 Future<int> getUserId() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   return pref.getInt('userId') ?? 0;
+}
+
+Future<String> getUserName() async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  return pref.getString('userName') ?? '';
 }
 
 // logout

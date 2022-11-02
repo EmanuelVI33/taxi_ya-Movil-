@@ -13,25 +13,31 @@ class _loading extends StatefulWidget {
 }
 
 class _loadingState extends State<_loading> {
+  int userID = 0;
+
+  _getId() async {
+    userID = await getUserId();
+  }
 
   void _loadUserInfo() async {
     String token = await getToken();
     if (token == '') {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+          (route) => false);
     } else {
       ApiResponse response = await getUserDetail();
       if (response.error == null) {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => false);
-      }
-      else if (response.error == unauthorized) {
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            (route) => false);
+      } else if (response.error == unauthorized) {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
-      }
-      else {
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+            (route) => false);
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('${response.error}'),
+          content: Text('${response.error}'),
         ));
       }
     }
@@ -51,8 +57,6 @@ class _loadingState extends State<_loading> {
       child: const Center(
         child: CircularProgressIndicator(),
       ),
-
     );
   }
 }
-

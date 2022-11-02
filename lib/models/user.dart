@@ -1,5 +1,5 @@
 class User {
-  int? id;
+  int id;
   String? nombre;
   String? apellido;
   String? telefono;
@@ -8,7 +8,7 @@ class User {
   String? token;
 
   User({
-    this.id,
+    required this.id,
     this.nombre,
     this.apellido,
     this.telefono,
