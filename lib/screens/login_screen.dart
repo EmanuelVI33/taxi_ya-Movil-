@@ -129,6 +129,8 @@ class _LoginForm extends StatelessWidget {
                         UserSimplePreference.setToken(user.token!);
 
                         userProvider.id = user.id;
+                        userProvider.nombre = user.nombre;
+                        userProvider.apellido = user.apellido;
                         userProvider.email = user.email;
                         userProvider.phone = user.telefono;
                         userProvider.token = user.token;

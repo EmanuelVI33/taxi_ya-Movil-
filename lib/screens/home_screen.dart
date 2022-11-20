@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taxi_ya/providers/home_provider.dart';
+import 'package:taxi_ya/providers/providers.dart';
+import 'package:taxi_ya/screens/login_screen.dart';
+import 'package:taxi_ya/services/auth_service.dart';
 import 'package:taxi_ya/theme/app_theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Pagina Principal',
@@ -39,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   AppBar _builderAppBar(BuildContext context) {
+    final userProvider = Provider.of<AuthService>(context, listen: false);
     return AppBar(
       leading: const Icon(
         Icons.menu,
@@ -51,12 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
             size: 32,
           ),
           onPressed: () {
-            // logout().then((value) => {
-            //       Navigator.of(context).pushAndRemoveUntil(
-            //           MaterialPageRoute(
-            //               builder: (context) => const LoginScreen()),
-            //           (route) => false)
-            //     });
+            userProvider.logout().then((_) => {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
+                      (route) => false)
+                });
           },
         ),
       ],

@@ -36,20 +36,22 @@ class AuthService extends ChangeNotifier {
   }
 
   Future<ApiResponse> register(String nombre, String apellido, String telefono,
-      String email, String password) async {
+      String email, String password, String passwordConfirmation) async {
     ApiResponse apiResponse = ApiResponse();
     try {
       final response =
           await http.post(Uri.parse(registerUrl), headers: headers, body: {
         'nombre': nombre,
         'apellido': apellido,
+        'telefono': telefono,
         'email': email,
         'password': password,
-        'telefono': telefono
+        'password_confirmation': passwordConfirmation
       });
       if (response.statusCode == 201) {
         User user = User.fromJson(json.decode(response.body));
-
+        storage.write(key: "token", value: user.token);
+        storage.write(key: "userId", value: user.id.toString());
         apiResponse.data = user;
       } else {
         apiResponse.error = "Ha ocurrido un error";
@@ -59,6 +61,11 @@ class AuthService extends ChangeNotifier {
       return apiResponse;
     }
     return apiResponse;
+  }
+
+  // Logout
+  Future<void> logout() async {
+    return await storage.deleteAll();
   }
 
   Future<String> readToken() async {
