@@ -16,7 +16,7 @@ const unauthorized = 'No Autorizado';
 InputDecoration kInputDecoration(String label) {
   return InputDecoration(
       labelText: label,
-      contentPadding: EdgeInsets.all(10),
+      contentPadding: const EdgeInsets.all(10),
       border: const OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: Colors.black)));
 }
@@ -31,7 +31,7 @@ SizedBox kTextButton(String label, Function onPressed) {
             backgroundColor:
                 MaterialStateColor.resolveWith((states) => Colors.indigo),
             padding: MaterialStateProperty.resolveWith(
-                (states) => EdgeInsets.symmetric(vertical: 10))),
+                (states) => const EdgeInsets.symmetric(vertical: 10))),
         onPressed: () => onPressed(),
         child: Text(
           label,

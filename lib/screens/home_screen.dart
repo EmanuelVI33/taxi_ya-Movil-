@@ -1,40 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:taxi_ya/models/user.dart';
-import 'package:taxi_ya/screens/login_screen.dart';
-import 'package:taxi_ya/screens/services_taxi/request_service.dart';
-import 'package:taxi_ya/screens/user/user_screen.dart';
-import 'package:taxi_ya/services/user_service.dart';
+import 'package:provider/provider.dart';
+import 'package:taxi_ya/providers/home_provider.dart';
 import 'package:taxi_ya/theme/app_theme.dart';
 
 class HomeScreen extends StatefulWidget {
-  // final int userID;
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _actual_page = 0;
-  final List<Widget> _pages = [
-    const UserScreen(),
-    const RequestServiceScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Pagina Principal',
       theme: AppTheme.lightTheme,
       home: Scaffold(
-        appBar: _buildAppBar(),
-        body: _pages[_actual_page],
+        appBar: _builderAppBar(context),
+        body: homeProvider.pages[homeProvider.actualPage],
         bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _actual_page,
+            currentIndex: homeProvider.actualPage,
             onTap: (index) {
               setState(() {
-                _actual_page = index;
+                homeProvider.actualPage = index;
               });
             },
             items: const [
@@ -47,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _builderAppBar(BuildContext context) {
     return AppBar(
       leading: const Icon(
         Icons.menu,
@@ -60,12 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
             size: 32,
           ),
           onPressed: () {
-            logout().then((value) => {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen()),
-                      (route) => false)
-                });
+            // logout().then((value) => {
+            //       Navigator.of(context).pushAndRemoveUntil(
+            //           MaterialPageRoute(
+            //               builder: (context) => const LoginScreen()),
+            //           (route) => false)
+            //     });
           },
         ),
       ],

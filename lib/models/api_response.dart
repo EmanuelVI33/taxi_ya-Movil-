@@ -1,4 +1,4 @@
-class ApiResponse {
+class ApiResponse<T> {
   Object? data;
   String? error;
 }

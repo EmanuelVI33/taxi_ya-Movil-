@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:taxi_ya/providers/home_provider.dart';
+import 'package:taxi_ya/providers/user_provider.dart';
+import 'package:taxi_ya/screens/check_auth_screen.dart';
 import 'package:taxi_ya/screens/screens.dart';
+import 'package:taxi_ya/services/auth_service.dart';
 import 'package:taxi_ya/theme/app_theme.dart';
+import 'package:taxi_ya/utils/user_simple_preferences.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,13 +20,33 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(
+        create: (_) => AuthService(),
+      ),
+      ChangeNotifierProvider(create: (_) => HomeProvider()),
+      ChangeNotifierProvider(
+        create: (_) => UserProvider(),
+      ),
+    ], child: const _MyApp());
+  }
+}
+
+class _MyApp extends StatelessWidget {
+  const _MyApp({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Pagina Principal',
-      initialRoute: 'login',
+      initialRoute: 'check',
       routes: {
+        'check': (_) => const CheckAuthScreen(),
         'login': (_) => const LoginScreen(),
-        'home': (_) => HomeScreen(),
+        'home': (_) => const HomeScreen(),
         'register': (_) => const RegisterScreen(),
       },
       theme: AppTheme.lightTheme,
