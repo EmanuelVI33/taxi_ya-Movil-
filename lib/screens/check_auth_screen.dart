@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/screens/screens.dart';
 import 'package:taxi_ya/services/auth_service.dart';
+import 'package:taxi_ya/services/user_service.dart';
 
 class CheckAuthScreen extends StatelessWidget {
   const CheckAuthScreen({super.key});
@@ -9,6 +11,7 @@ class CheckAuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context, listen: false);
+    final user = Provider.of<UserProvider>(context, listen: false);
 
     return Scaffold(
       body: Center(
@@ -26,7 +29,7 @@ class CheckAuthScreen extends StatelessWidget {
                         transitionDuration: const Duration(seconds: 0)));
               });
             } else {
-              Future.microtask(() {
+              Future.microtask(() async {
                 Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(

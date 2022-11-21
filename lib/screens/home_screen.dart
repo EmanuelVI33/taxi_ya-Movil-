@@ -4,6 +4,7 @@ import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/screens/login_screen.dart';
 import 'package:taxi_ya/services/auth_service.dart';
 import 'package:taxi_ya/theme/app_theme.dart';
+import 'package:taxi_ya/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       theme: AppTheme.lightTheme,
       home: Scaffold(
         appBar: _builderAppBar(context),
+        drawer: const LateralMenu(),
         body: homeProvider.pages[homeProvider.actualPage],
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: homeProvider.actualPage,
@@ -44,10 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
   AppBar _builderAppBar(BuildContext context) {
     final userProvider = Provider.of<AuthService>(context, listen: false);
     return AppBar(
-      leading: const Icon(
-        Icons.menu,
-        size: 30,
-      ),
       actions: [
         IconButton(
           icon: const Icon(

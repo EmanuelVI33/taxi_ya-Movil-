@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taxi_ya/models/models.dart';
 
 class UserProvider extends ChangeNotifier {
   int _id = 0;
@@ -44,4 +46,11 @@ class UserProvider extends ChangeNotifier {
   }
 
   get token => _token;
+
+  Future<void> DetailUser(User user) async {
+    _nombre = user.nombre ?? "";
+    _apellido = user.apellido ?? "";
+    _phone = user.telefono ?? "";
+    _email = user.email ?? "";
+  }
 }

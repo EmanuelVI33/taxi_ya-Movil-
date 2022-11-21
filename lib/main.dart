@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taxi_ya/providers/home_provider.dart';
-import 'package:taxi_ya/providers/user_provider.dart';
+import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/screens/check_auth_screen.dart';
 import 'package:taxi_ya/screens/screens.dart';
 import 'package:taxi_ya/services/auth_service.dart';
 import 'package:taxi_ya/theme/app_theme.dart';
-import 'package:taxi_ya/utils/user_simple_preferences.dart';
 
 void main() => runApp(const MyApp());
 
@@ -27,6 +25,9 @@ class _MyAppState extends State<MyApp> {
       ChangeNotifierProvider(create: (_) => HomeProvider()),
       ChangeNotifierProvider(
         create: (_) => UserProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => DriverProvider(),
       ),
     ], child: const _MyApp());
   }
