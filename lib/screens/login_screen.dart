@@ -14,10 +14,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (UserSimplePreference.getUserId() != 0) {
-    //   // Usuario logeado
-    //   Navigator.pushReplacementNamed(context, 'home');
-    // }
     return Scaffold(
         body: AuthBackground(
             child: SingleChildScrollView(
@@ -57,6 +53,8 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
+    final authService = Provider.of<AuthService>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return Form(
       key: loginForm.formKey,
@@ -108,22 +106,18 @@ class _LoginForm extends StatelessWidget {
                   ? null
                   : () async {
                       FocusScope.of(context).unfocus();
-                      final authService =
-                          Provider.of<AuthService>(context, listen: false);
 
                       if (!loginForm.isValidForm()) return;
 
                       loginForm.isLoading = true;
 
-                      // TODO: validar si el login es correcto
                       final ApiResponse response = await authService.login(
                           loginForm.email, loginForm.password);
 
-                      final user = response.data as User;
-
                       if (response.error == null) {
-                        final userProvider =
-                            Provider.of<UserProvider>(context, listen: false);
+                        loginForm.isLoading = false;
+
+                        final user = response.data as User;
 
                         UserSimplePreference.setUserId(user.id);
                         UserSimplePreference.setToken(user.token!);
@@ -135,9 +129,10 @@ class _LoginForm extends StatelessWidget {
                         userProvider.phone = user.telefono;
                         userProvider.token = user.token;
 
+                        await Future.delayed(const Duration(seconds: 2));
+
                         Navigator.pushReplacementNamed(context, 'home');
                       } else {
-                        // NotificationsService.showSnackbar(errorMessage);
                         loginForm.isLoading = false;
                       }
                     },

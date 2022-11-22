@@ -13,7 +13,7 @@ class AuthService extends ChangeNotifier {
     'Accept': 'application/json',
   };
 
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   Future<ApiResponse> login(String email, String password) async {
     ApiResponse apiResponse = ApiResponse();

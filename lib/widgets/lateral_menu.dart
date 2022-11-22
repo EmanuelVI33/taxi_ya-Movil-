@@ -18,8 +18,8 @@ class LateralMenu extends StatelessWidget {
           child: Column(
             children: [
               Container(
+                padding: const EdgeInsets.only(top: 30, bottom: 20),
                 child: _builderIcon(),
-                padding: EdgeInsets.only(top: 30, bottom: 20),
               ),
               const Text(
                 "Taxi Ya",
@@ -30,8 +30,9 @@ class LateralMenu extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 20),
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+                margin: const EdgeInsets.only(top: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                 width: double.infinity,
                 color: Colors.grey[100],
                 child: Column(
@@ -72,6 +73,17 @@ class LateralMenu extends StatelessWidget {
                   width: double.infinity,
                   color: Colors.grey[100],
                   child: const MyTextButton("Ajuste")),
+              Expanded(
+                child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+                    width: double.infinity,
+                    color: Colors.black,
+                    child: const Text(
+                      "Derechos Reservados 2022",
+                      style: TextStyle(color: Colors.white),
+                    )),
+              )
             ],
           ),
         ),
