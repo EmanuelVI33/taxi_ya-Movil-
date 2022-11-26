@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 // Strings URL
-const baseUrl = 'https://julicosuarez.ga/api';
-const apiToken = 'base64:1hA0CRnnm5lka5NKzVSOYAb+btjEOQXD+B384ZxlAR4=';
-const loginUrl = '$baseUrl/login/';
-const registerUrl = '$baseUrl/register/';
-const logoutUrl = "$baseUrl/logout/";
-const userDetailUrl = "$baseUrl/user/";
+// const baseUrl = 'https://julicosuarez.ga/api';  // Proyecto Desplegado
+const baseUrl =
+    'http://192.168.0.107:80/api'; // Proyecto local, el host es su direcció ip
+const loginUrl = '$baseUrl/login';
+const registerUrl = '$baseUrl/register';
+const logoutUrl = "$baseUrl/logout";
+const userUrl = "$baseUrl/user";
+const userDetailUrl = "$baseUrl/user-detail";
 
 // Errores
 const somethingWentWrong = 'Ha occurido un error, de nuevo';
@@ -35,7 +37,7 @@ SizedBox kTextButton(String label, Function onPressed) {
         onPressed: () => onPressed(),
         child: Text(
           label,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     ),

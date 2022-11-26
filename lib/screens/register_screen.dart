@@ -186,7 +186,7 @@ class _LoginForm extends StatelessWidget {
                         userProvider.nombre = user.nombre;
                         userProvider.apellido = user.apellido;
                         userProvider.email = user.email;
-                        userProvider.phone = user.telefono;
+                        userProvider.telefono = user.telefono;
                         userProvider.token = user.token;
 
                         Navigator.pushReplacementNamed(context, 'home');

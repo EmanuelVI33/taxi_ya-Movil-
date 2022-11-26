@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:taxi_ya/models/models.dart';
 
 class UserProvider extends ChangeNotifier {
   int _id = 0;
   String _nombre = "";
   String _apellido = "";
   String _email = "";
-  String _phone = "";
+  String _telefono = "";
+  String _image = "";
   String _token = "";
+  bool _loading = false;
 
   set id(id) {
     _id = id;
@@ -35,11 +34,11 @@ class UserProvider extends ChangeNotifier {
 
   get email => _email;
 
-  set phone(phone) {
-    _phone = phone;
+  set telefono(telefono) {
+    _telefono = telefono;
   }
 
-  get phone => _phone;
+  get telefono => _telefono;
 
   set token(token) {
     _token = token;
@@ -47,10 +46,18 @@ class UserProvider extends ChangeNotifier {
 
   get token => _token;
 
-  Future<void> DetailUser(User user) async {
-    _nombre = user.nombre ?? "";
-    _apellido = user.apellido ?? "";
-    _phone = user.telefono ?? "";
-    _email = user.email ?? "";
+  set loading(loading) {
+    _loading = loading;
   }
+
+  get image => _image;
+
+  set image(image) {
+    _image = image;
+  }
+
+  get loading => _loading;
+
+  bool existNull() =>
+      _nombre == '' || _apellido == '' || _telefono == '' || _email == '';
 }

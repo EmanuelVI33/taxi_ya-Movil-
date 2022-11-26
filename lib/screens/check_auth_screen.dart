@@ -11,7 +11,6 @@ class CheckAuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context, listen: false);
-    final user = Provider.of<UserProvider>(context, listen: false);
 
     return Scaffold(
       body: Center(
@@ -21,7 +20,7 @@ class CheckAuthScreen extends StatelessWidget {
             if (!snapshot.hasData) return const Text('');
 
             if (snapshot.data == '') {
-              Future.microtask(() {
+              Future.microtask(() async {
                 Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(

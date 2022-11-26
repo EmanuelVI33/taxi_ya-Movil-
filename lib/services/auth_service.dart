@@ -6,7 +6,6 @@ import 'package:taxi_ya/constant.dart';
 import 'package:http/http.dart' as http;
 import 'package:taxi_ya/models/api_response.dart';
 import 'package:taxi_ya/models/user.dart';
-import 'package:taxi_ya/providers/user_provider.dart';
 
 class AuthService extends ChangeNotifier {
   static const headers = {
@@ -70,5 +69,9 @@ class AuthService extends ChangeNotifier {
 
   Future<String> readToken() async {
     return await storage.read(key: 'token') ?? '';
+  }
+
+  Future<String> readId() async {
+    return await storage.read(key: 'userId') ?? '';
   }
 }

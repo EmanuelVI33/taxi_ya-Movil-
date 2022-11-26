@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
-import 'package:taxi_ya/screens/check_auth_screen.dart';
 import 'package:taxi_ya/screens/screens.dart';
-import 'package:taxi_ya/services/auth_service.dart';
+import 'package:taxi_ya/services/services.dart';
 import 'package:taxi_ya/theme/app_theme.dart';
 
 void main() => runApp(const MyApp());
@@ -29,6 +28,9 @@ class _MyAppState extends State<MyApp> {
       ChangeNotifierProvider(
         create: (_) => DriverProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => UserService(),
+      ),
     ], child: const _MyApp());
   }
 }
@@ -43,13 +45,13 @@ class _MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Pagina Principal',
-      initialRoute: 'check',
       routes: {
         'check': (_) => const CheckAuthScreen(),
         'login': (_) => const LoginScreen(),
         'home': (_) => const HomeScreen(),
         'register': (_) => const RegisterScreen(),
       },
+      initialRoute: 'check',
       theme: AppTheme.lightTheme,
     );
   }

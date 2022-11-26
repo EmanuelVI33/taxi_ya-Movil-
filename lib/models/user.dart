@@ -6,6 +6,7 @@ class User {
   String? email;
   String? password;
   String? token;
+  String? image;
 
   User({
     required this.id,
@@ -15,17 +16,18 @@ class User {
     this.email,
     this.password,
     this.token,
+    this.image,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['user']['id'],
-      nombre: json['user']['nombre'],
-      apellido: json['user']['apellido'],
-      telefono: json['user']['telefono'],
-      email: json['user']['email'],
-      password: json['user']['password'],
-      token: json['token'],
-    );
+        id: json['user']['id'],
+        nombre: json['user']['nombre'],
+        apellido: json['user']['apellido'],
+        telefono: json['user']['telefono'],
+        email: json['user']['email'],
+        password: json['user']['password'],
+        token: json['token'],
+        image: json['image']);
   }
 }

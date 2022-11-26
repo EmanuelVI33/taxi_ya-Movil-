@@ -105,6 +105,7 @@ class _LoginForm extends StatelessWidget {
               onPressed: loginForm.isLoading
                   ? null
                   : () async {
+                      final navigator = Navigator.of(context);
                       FocusScope.of(context).unfocus();
 
                       if (!loginForm.isValidForm()) return;
@@ -126,12 +127,12 @@ class _LoginForm extends StatelessWidget {
                         userProvider.nombre = user.nombre;
                         userProvider.apellido = user.apellido;
                         userProvider.email = user.email;
-                        userProvider.phone = user.telefono;
+                        userProvider.telefono = user.telefono;
                         userProvider.token = user.token;
 
                         await Future.delayed(const Duration(seconds: 2));
 
-                        Navigator.pushReplacementNamed(context, 'home');
+                        navigator.pushReplacementNamed('home');
                       } else {
                         loginForm.isLoading = false;
                       }
