@@ -179,8 +179,8 @@ class _LoginForm extends StatelessWidget {
                         final userProvider =
                             Provider.of<UserProvider>(context, listen: false);
 
-                        UserSimplePreference.setUserId(user.id);
-                        UserSimplePreference.setToken(user.token!);
+                        // UserSimplePreference.setUserId(user.id);
+                        // UserSimplePreference.setToken(user.token!);
 
                         userProvider.id = user.id;
                         userProvider.nombre = user.nombre;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Strings URL
 // const baseUrl = 'https://julicosuarez.ga/api';  // Proyecto Desplegado
 const baseUrl =
-    'http://192.168.0.107:80/api'; // Proyecto local, el host es su direcció ip
+    'http://192.168.0.8:80/api'; // Proyecto local, el host es su direcció ip
 const loginUrl = '$baseUrl/login';
 const registerUrl = '$baseUrl/register';
 const logoutUrl = "$baseUrl/logout";

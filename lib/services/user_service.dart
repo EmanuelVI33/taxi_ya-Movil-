@@ -15,7 +15,6 @@ class UserService extends ChangeNotifier {
   Future<ApiResponse> show(userId) async {
     ApiResponse apiResponse = ApiResponse();
     dynamic token = storage.read(key: 'token');
-    print('$token  -  $userId');
     try {
       final response = await http.get(
         Uri.parse('$userUrl/$userId'),

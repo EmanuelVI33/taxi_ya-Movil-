@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
-  int _id = 0;
+  String _id = "";
   String _nombre = "";
   String _apellido = "";
   String _email = "";
   String _telefono = "";
   String _image = "";
+  List<String> _role = [];
   String _token = "";
   bool _loading = false;
 
+  final storage = const FlutterSecureStorage();
+
   set id(id) {
-    _id = id;
+    _id = id.toString();
   }
 
   get id => _id;
@@ -60,4 +65,15 @@ class UserProvider extends ChangeNotifier {
 
   bool existNull() =>
       _nombre == '' || _apellido == '' || _telefono == '' || _email == '';
+
+  Future<void> loadingUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _id = prefs.getString('userId')!;
+    _nombre = prefs.getString('userNombre')!;
+    _apellido = prefs.getString('userApellido')!;
+    _telefono = prefs.getString('userTelefono')!;
+    _email = prefs.getString('userEmail')!;
+    _image = prefs.getString('userImage')!;
+    _role = prefs.getStringList('userRole')!;
+  }
 }

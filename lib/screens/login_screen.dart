@@ -120,8 +120,8 @@ class _LoginForm extends StatelessWidget {
 
                         final user = response.data as User;
 
-                        UserSimplePreference.setUserId(user.id);
-                        UserSimplePreference.setToken(user.token!);
+                        // UserSimplePreference.setUserId(user.id);
+                        // UserSimplePreference.setToken(user.token!);
 
                         userProvider.id = user.id;
                         userProvider.nombre = user.nombre;
