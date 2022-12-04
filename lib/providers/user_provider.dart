@@ -11,6 +11,7 @@ class UserProvider extends ChangeNotifier {
   String _telefono = "";
   String _image = "";
   List<String> _role = [];
+  bool _isDriver = false;
   String _token = "";
   bool _loading = false;
 
@@ -73,6 +74,13 @@ class UserProvider extends ChangeNotifier {
   }
 
   get loading => _loading;
+
+  set isDriver(isDriver) {
+    _isDriver = isDriver;
+    notifyListeners();
+  }
+
+  get isDriver => _isDriver;
 
   bool existNull() =>
       _nombre == '' || _apellido == '' || _telefono == '' || _email == '';

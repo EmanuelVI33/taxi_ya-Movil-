@@ -65,3 +65,10 @@ Row KLoginRegisterHint(String text, String label, Function onTab) {
     ],
   );
 }
+
+// AppBar
+AppBar MyAppBar(String title) {
+  return AppBar(
+    title: Text(title),
+  );
+}

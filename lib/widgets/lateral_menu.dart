@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
-import 'package:taxi_ya/widgets/text_button.dart';
+import 'package:taxi_ya/screens/screens.dart';
 
 class LateralMenu extends StatelessWidget {
   const LateralMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final driverProvider = Provider.of<DriverProvider>(context, listen: false);
+    final driverProvider = Provider.of<HomeProvider>(context);
 
     return Drawer(
       child: Container(
@@ -37,53 +37,92 @@ class LateralMenu extends StatelessWidget {
                 color: Colors.grey[100],
                 child: Column(
                   children: [
-                    const MyTextButton("Modo Conductor"),
+                    const TextDrawer("Modo Conductor"),
                     const SizedBox(
-                      width: 10,
+                      width: 15,
                     ),
                     Switch(
                         value: driverProvider.isDriver,
-                        onChanged: (value) {
+                        onChanged: (bool value) {
                           driverProvider.isDriver = value;
                         })
                   ],
                 ),
               ),
+
+              // Mis Viajes
               Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                   color: Colors.grey[100],
                   width: double.infinity,
-                  child: const MyTextButton("Mis Viajes")),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TravelHistoryScreen()));
+                      },
+                      child: const TextDrawer("Historial de Viajes"))),
+
+              // Puntuación
               Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                   width: double.infinity,
                   color: Colors.grey[100],
-                  child: const MyTextButton("Puntuación")),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PunctationScreen()));
+                      },
+                      child: const TextDrawer("Puntuación"))),
+
+              // Soporte
               Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                   width: double.infinity,
                   color: Colors.grey[100],
-                  child: const MyTextButton("Soporte")),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TravelHistoryScreen()));
+                      },
+                      child: const TextDrawer("Soporte"))),
+
+              // Ajustes
               Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                   width: double.infinity,
                   color: Colors.grey[100],
-                  child: const MyTextButton("Ajuste")),
-              Expanded(
-                child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
-                    width: double.infinity,
-                    color: Colors.black,
-                    child: const Text(
-                      "Derechos Reservados 2022",
-                      style: TextStyle(color: Colors.white),
-                    )),
-              )
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TravelHistoryScreen()));
+                      },
+                      child: const TextDrawer("Ajuste"))),
+
+              Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+                  width: double.infinity,
+                  color: Colors.black,
+                  child: const Text(
+                    "Derechos Reservados 2022",
+                    style: TextStyle(color: Colors.white),
+                  ))
             ],
           ),
         ),
@@ -97,6 +136,25 @@ class LateralMenu extends StatelessWidget {
       size: 100,
       color: Colors.indigo,
       semanticLabel: "Taxi Ya",
+    );
+  }
+}
+
+class TextDrawer extends StatelessWidget {
+  final String _text;
+
+  const TextDrawer(this._text, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _text,
+      style: const TextStyle(
+        fontSize: 15,
+        color: Colors.indigo,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 2,
+      ),
     );
   }
 }
