@@ -15,14 +15,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    final homeProvider = Provider.of<HomeProvider>(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

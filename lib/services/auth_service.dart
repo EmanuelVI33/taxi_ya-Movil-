@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,13 +16,15 @@ class AuthService extends ChangeNotifier {
 
   Future<ApiResponse> login(String email, String password) async {
     ApiResponse apiResponse = ApiResponse();
-
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       final response = await http.post(Uri.parse(loginUrl),
           headers: headers, body: {'email': email, 'password': password});
       if (response.statusCode == 201) {
         User user = User.fromJson(json.decode(response.body));
-        setUser(user);
+        await prefs.setString('userId', user.id.toString());
+        await prefs.setString('token', user.token ?? '');
+        // setUser(user);
         apiResponse.data = user;
       } else {
         apiResponse.error = "Ha ocurrido un error";
@@ -52,7 +53,9 @@ class AuthService extends ChangeNotifier {
 
       if (response.statusCode == 201) {
         final user = User.fromJson(json.decode(response.body));
-        setUser(user);
+        await prefs.setString('userId', user.id.toString());
+        await prefs.setString('token', user.token ?? '');
+        // setUser(user);
         apiResponse.data = user;
       } else {
         apiResponse.error = "Ha ocurrido un error";
@@ -76,7 +79,8 @@ class AuthService extends ChangeNotifier {
   }
 
   Future<String> readId() async {
-    return await storage.read(key: 'userId') ?? '';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userId') ?? '';
   }
 
   Future<void> setUser(User user) async {
@@ -88,5 +92,23 @@ class AuthService extends ChangeNotifier {
     await prefs.setString('userTelefono', user.telefono ?? '');
     await prefs.setString('userImage', user.image ?? '');
     await prefs.setStringList('userRole', user.role ?? []);
+    await prefs.setString('token', user.token ?? '');
+  }
+
+  Future<Map<String, dynamic>> getUser() async {
+    Map<String, dynamic> datas = {};
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    datas = {
+      'id': prefs.getString('userId'),
+      'nombre': prefs.getString('userNombre'),
+      'apellido': prefs.getString('userApellido'),
+      'email': prefs.getString('userEmail'),
+      'telefono': prefs.getString('userTelefono'),
+      'image': prefs.getString('userImage'),
+      'roles': prefs.getStringList('userRoles'),
+      'token': prefs.getString('token'),
+    };
+
+    return datas;
   }
 }

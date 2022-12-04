@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/screens/screens.dart';
 import 'package:taxi_ya/services/auth_service.dart';
-import 'package:taxi_ya/services/user_service.dart';
 
 class CheckAuthScreen extends StatelessWidget {
   const CheckAuthScreen({super.key});

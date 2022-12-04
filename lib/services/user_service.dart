@@ -2,19 +2,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxi_ya/models/models.dart';
 import 'package:taxi_ya/constant.dart';
 
 class UserService extends ChangeNotifier {
-  final storage = const FlutterSecureStorage();
+  // final storage = const FlutterSecureStorage();
 
   static const headers = {
     'Accept': 'application/json',
   };
 
   Future<ApiResponse> show(userId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     ApiResponse apiResponse = ApiResponse();
-    dynamic token = storage.read(key: 'token');
+    String token = prefs.getString('token') ?? '';
     try {
       final response = await http.get(
         Uri.parse('$userUrl/$userId'),
