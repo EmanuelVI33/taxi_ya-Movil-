@@ -4,7 +4,6 @@ import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/providers/register_form_provider.dart';
 import 'package:taxi_ya/services/auth_service.dart';
 import 'package:taxi_ya/ui/input_decorations.dart';
-import 'package:taxi_ya/utils/user_simple_preferences.dart';
 import 'package:taxi_ya/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -179,14 +178,12 @@ class _LoginForm extends StatelessWidget {
                         final userProvider =
                             Provider.of<UserProvider>(context, listen: false);
 
-                        // UserSimplePreference.setUserId(user.id);
-                        // UserSimplePreference.setToken(user.token!);
-
                         userProvider.id = user.id;
                         userProvider.nombre = user.nombre;
                         userProvider.apellido = user.apellido;
                         userProvider.email = user.email;
                         userProvider.telefono = user.telefono;
+                        userProvider.image = user.image;
                         userProvider.token = user.token;
 
                         Navigator.pushReplacementNamed(context, 'home');

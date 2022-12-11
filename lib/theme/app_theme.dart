@@ -26,7 +26,7 @@ class AppTheme {
 
     // Icon
     iconTheme: const IconThemeData(
-      color: Colors.red,
+      color: Colors.indigo,
     ),
 
     // ElevateButton
@@ -37,5 +37,4 @@ class AppTheme {
       elevation: 0,
     )),
   );
-  
 }

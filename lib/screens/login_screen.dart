@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/services/auth_service.dart';
-import 'package:taxi_ya/utils/user_simple_preferences.dart';
 import 'package:taxi_ya/widgets/auth_background.dart';
 import 'package:taxi_ya/widgets/card_container.dart';
 
@@ -53,8 +52,10 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
-    final authService = Provider.of<AuthService>(context, listen: false);
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final authService =
+        Provider.of<AuthService>(context, listen: false); // Peticciones http
+    final userProvider =
+        Provider.of<UserProvider>(context, listen: false); // Datos del screen
 
     return Form(
       key: loginForm.formKey,
@@ -117,17 +118,14 @@ class _LoginForm extends StatelessWidget {
 
                       if (response.error == null) {
                         loginForm.isLoading = false;
-
                         final user = response.data as User;
-
-                        // UserSimplePreference.setUserId(user.id);
-                        // UserSimplePreference.setToken(user.token!);
 
                         userProvider.id = user.id;
                         userProvider.nombre = user.nombre;
                         userProvider.apellido = user.apellido;
                         userProvider.email = user.email;
                         userProvider.telefono = user.telefono;
+                        userProvider.image = user.image;
                         userProvider.token = user.token;
 
                         await Future.delayed(const Duration(seconds: 2));

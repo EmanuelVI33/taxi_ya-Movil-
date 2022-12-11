@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
+import 'package:taxi_ya/screens/register_driver_screen.dart';
 import 'package:taxi_ya/screens/screens.dart';
 import 'package:taxi_ya/services/services.dart';
 import 'package:taxi_ya/theme/app_theme.dart';
@@ -51,6 +52,7 @@ class _MyApp extends StatelessWidget {
         'home': (_) => const HomeScreen(),
         'user': (_) => const UserScreen(),
         'driver': (_) => const DriverScreen(),
+        'register_driver': (_) => const RegisterDriverScreen(),
         'register': (_) => const RegisterScreen(),
         'service': (_) => const RequestServiceScreen(),
         'travel_history': (_) => const TravelHistoryScreen(),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 // Strings URL
 // const baseUrl = 'https://julicosuarez.ga/api';  // Proyecto Desplegado
-const baseUrl =
-    'http://192.168.0.8:80/api'; // Proyecto local, el host es su direcció ip
+const url = 'http://192.168.0.103';
+const baseUrl = '$url/api'; // Proyecto local, el host es su direcció ip
 const loginUrl = '$baseUrl/login';
 const registerUrl = '$baseUrl/register';
 const logoutUrl = "$baseUrl/logout";
@@ -14,6 +14,48 @@ const userDetailUrl = "$baseUrl/user-detail";
 const somethingWentWrong = 'Ha occurido un error, de nuevo';
 const serverError = 'Error en el Servidor';
 const unauthorized = 'No Autorizado';
+
+void displayDialog(BuildContext context, String titulo, String content,
+    String message, String route, IconData icon) {
+  showDialog(
+    // barrierDismissible:
+    //     true, // Para que se desactiva al presionar fuera del dialogo
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusDirectional.circular(15)),
+        title: Text(titulo),
+        content: Column(
+            mainAxisSize: MainAxisSize.min, // Se adapta al tamaño de los hijos
+            children: [
+              Text(content),
+              const SizedBox(
+                height: 10,
+              ),
+              Icon(
+                icon,
+                size: 50,
+              ),
+            ]),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pushNamed(context, route),
+            child: Text(message),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'Cancelar',
+              style: TextStyle(color: Colors.redAccent),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
 
 InputDecoration kInputDecoration(String label) {
   return InputDecoration(

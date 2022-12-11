@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taxi_ya/constant.dart' show displayDialog;
 import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/screens/screens.dart';
 
@@ -9,6 +10,7 @@ class LateralMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final driverProvider = Provider.of<HomeProvider>(context);
+    bool isDriver = Provider.of<UserProvider>(context).isDriver;
 
     return Drawer(
       child: Container(
@@ -44,7 +46,16 @@ class LateralMenu extends StatelessWidget {
                     Switch(
                         value: driverProvider.isDriver,
                         onChanged: (bool value) {
-                          driverProvider.isDriver = value;
+                          isDriver
+                              ? driverProvider.isDriver = value
+                              : displayDialog(
+                                  context,
+                                  'No estas Registrado!',
+                                  'Para entrar en modo conductor debes registrarte',
+                                  'Registrate',
+                                  'register_driver',
+                                  Icons.drive_eta_rounded,
+                                );
                         })
                   ],
                 ),

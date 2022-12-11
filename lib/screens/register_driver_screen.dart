@@ -5,6 +5,13 @@ class RegisterDriverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Registrate como Conductor'),
+      ),
+      body: const Center(
+        child: Text('Registrate'),
+      ),
+    );
   }
 }

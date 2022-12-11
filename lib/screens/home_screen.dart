@@ -47,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   AppBar _builderAppBar(BuildContext context) {
-    final userProvider = Provider.of<AuthService>(context, listen: false);
     return AppBar(
       actions: [
         IconButton(
@@ -56,12 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             size: 32,
           ),
           onPressed: () {
-            userProvider.logout().then((_) => {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen()),
-                      (route) => false)
-                });
+            displayDialogLogout(context);
           },
         ),
       ],
@@ -76,4 +70,59 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.indigo,
     );
   }
+}
+
+void displayDialogLogout(BuildContext context) {
+  final userLogout = Provider.of<AuthService>(context, listen: false).logout();
+  showDialog(
+    // barrierDismissible:
+    //     true, // Para que se desactiva al presionar fuera del dialogo
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusDirectional.circular(15)),
+        title: Container(
+          alignment: Alignment.center,
+          child: const Text(
+            'Esta seguro de cerrar sección!',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        content: Column(
+            mainAxisSize: MainAxisSize.min, // Se adapta al tamaño de los hijos
+            children: const [
+              Icon(
+                Icons.person,
+                size: 40,
+              ),
+            ]),
+        actions: [
+          TextButton(
+            onPressed: () {
+              userLogout.then((_) => {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()),
+                        (route) => false)
+                  });
+            },
+            child: const Text('Si'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'Cancelar',
+              style: TextStyle(color: Colors.redAccent),
+            ),
+          ),
+        ],
+      );
+    },
+  );
 }

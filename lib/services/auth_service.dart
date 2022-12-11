@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxi_ya/constant.dart';
 import 'package:http/http.dart' as http;
@@ -12,8 +11,7 @@ class AuthService extends ChangeNotifier {
     'Accept': 'application/json',
   };
 
-  final storage = const FlutterSecureStorage();
-
+  // final storage = const FlutterSecureStorage();
   Future<ApiResponse> login(String email, String password) async {
     ApiResponse apiResponse = ApiResponse();
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -83,32 +81,32 @@ class AuthService extends ChangeNotifier {
     return prefs.getString('userId') ?? '';
   }
 
-  Future<void> setUser(User user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('userId', user.id.toString());
-    await prefs.setString('userNombre', user.nombre ?? '');
-    await prefs.setString('userApellido', user.apellido ?? '');
-    await prefs.setString('userEmail', user.email ?? '');
-    await prefs.setString('userTelefono', user.telefono ?? '');
-    await prefs.setString('userImage', user.image ?? '');
-    await prefs.setStringList('userRole', user.role ?? []);
-    await prefs.setString('token', user.token ?? '');
-  }
+  // Future<void> setUser(User user) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString('userId', user.id.toString());
+  //   await prefs.setString('userNombre', user.nombre ?? '');
+  //   await prefs.setString('userApellido', user.apellido ?? '');
+  //   await prefs.setString('userEmail', user.email ?? '');
+  //   await prefs.setString('userTelefono', user.telefono ?? '');
+  //   await prefs.setString('userImage', user.image ?? '');
+  //   await prefs.setStringList('userRole', user.role ?? []);
+  //   await prefs.setString('token', user.token ?? '');
+  // }
 
-  Future<Map<String, dynamic>> getUser() async {
-    Map<String, dynamic> datas = {};
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    datas = {
-      'id': prefs.getString('userId'),
-      'nombre': prefs.getString('userNombre'),
-      'apellido': prefs.getString('userApellido'),
-      'email': prefs.getString('userEmail'),
-      'telefono': prefs.getString('userTelefono'),
-      'image': prefs.getString('userImage'),
-      'roles': prefs.getStringList('userRoles'),
-      'token': prefs.getString('token'),
-    };
+  // Future<Map<String, dynamic>> getUser() async {
+  //   Map<String, dynamic> datas = {};
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   datas = {
+  //     'id': prefs.getString('userId'),
+  //     'nombre': prefs.getString('userNombre'),
+  //     'apellido': prefs.getString('userApellido'),
+  //     'email': prefs.getString('userEmail'),
+  //     'telefono': prefs.getString('userTelefono'),
+  //     'image': prefs.getString('userImage'),
+  //     'roles': prefs.getStringList('userRoles'),
+  //     'token': prefs.getString('token'),
+  //   };
 
-    return datas;
-  }
+  //   return datas;
+  // }
 }

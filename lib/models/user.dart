@@ -6,6 +6,7 @@ class User {
   String? email;
   String? password;
   String? image;
+  bool? isDriver;
   List<String>? role;
   String? token;
 
@@ -16,9 +17,10 @@ class User {
     this.telefono,
     this.email,
     this.password,
-    this.token,
-    this.role,
     this.image,
+    this.isDriver,
+    this.role,
+    this.token,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -35,8 +37,9 @@ class User {
         apellido: json['user']['apellido'],
         telefono: json['user']['telefono'],
         email: json['user']['email'],
+        isDriver: json['user']['is_driver'],
         role: rolesStr,
-        token: json['token'],
-        image: json['image'] ?? '');
+        image: json['image'] ?? '',
+        token: json['token']);
   }
 }

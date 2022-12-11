@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:taxi_ya/models/models.dart';
+import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {
   String _id = "";
@@ -12,6 +9,7 @@ class UserProvider extends ChangeNotifier {
   String _image = "";
   List<String> _role = [];
   bool _isDriver = false;
+  bool _driverMode = false;
   String _token = "";
   bool _loading = false;
 
@@ -66,21 +64,40 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  get image => _image;
+  get loading => _loading;
 
   set image(image) {
     _image = image;
     notifyListeners();
   }
 
-  get loading => _loading;
+  get image => _image;
 
   set isDriver(isDriver) {
-    _isDriver = isDriver;
+    _driverMode = isDriver;
     notifyListeners();
   }
 
   get isDriver => _isDriver;
+
+  set driverMode(driverMode) {
+    _driverMode = driverMode;
+    notifyListeners();
+  }
+
+  get driverMode => _driverMode;
+
+  void setUser(String id, String? nombre, String? apellido, String? telefono,
+      String? email, String? image, bool? isDriver) {
+    _id = id;
+    _nombre = nombre ?? 'Sin Nombre';
+    _apellido = apellido ?? 'Sin Apellido';
+    _telefono = telefono ?? 'No tiene Telefono';
+    _email = email ?? 'No tiene email';
+    _image = image ?? '';
+    _isDriver = isDriver ?? false;
+    notifyListeners();
+  }
 
   bool existNull() =>
       _nombre == '' || _apellido == '' || _telefono == '' || _email == '';
