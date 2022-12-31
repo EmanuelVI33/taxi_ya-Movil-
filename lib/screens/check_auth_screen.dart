@@ -18,7 +18,7 @@ class CheckAuthScreen extends StatelessWidget {
             if (!snapshot.hasData) return const Text('');
 
             if (snapshot.data == '') {
-              Future.microtask(() async {
+              Future.microtask(() {
                 Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(
@@ -26,7 +26,7 @@ class CheckAuthScreen extends StatelessWidget {
                         transitionDuration: const Duration(seconds: 0)));
               });
             } else {
-              Future.microtask(() async {
+              Future.microtask(() {
                 Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(

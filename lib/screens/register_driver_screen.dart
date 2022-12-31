@@ -215,6 +215,9 @@ class RegisterRequestScreen extends StatelessWidget {
                     onPressed: registerDriver.isLoading
                         ? null
                         : () async {
+                            print(registerDriver.imagenDriver['ciAnverso'].path
+                                .split('/')
+                                .last);
                             registerDriver.isLoading = true;
                             final register = Provider.of<RegisterDriver>(
                                 context,

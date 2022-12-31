@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/screens/login_screen.dart';
 import 'package:taxi_ya/services/auth_service.dart';
-import 'package:taxi_ya/theme/app_theme.dart';
 import 'package:taxi_ya/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,31 +17,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Pagina Principal',
-      theme: AppTheme.lightTheme,
-      home: Scaffold(
-        appBar: _builderAppBar(context),
-        drawer: const LateralMenu(),
-        body: homeProvider.pages[homeProvider.actualPage],
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: homeProvider.actualPage,
-            onTap: (index) {
-              setState(() {
-                homeProvider.actualPage = index;
-              });
-            },
-            items: [
-              homeProvider.isDriver
-                  ? const BottomNavigationBarItem(
-                      icon: Icon(Icons.map_rounded), label: 'Modo conductor')
-                  : const BottomNavigationBarItem(
-                      icon: Icon(Icons.home), label: 'Principal'),
-              const BottomNavigationBarItem(
-                  icon: Icon(Icons.map_rounded), label: 'Viajar'),
-            ]),
-      ),
+    return Scaffold(
+      appBar: _builderAppBar(context),
+      drawer: const LateralMenu(),
+      body: homeProvider.pages[homeProvider.actualPage],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: homeProvider.actualPage,
+          onTap: (index) {
+            setState(() {
+              homeProvider.actualPage = index;
+            });
+          },
+          items: [
+            homeProvider.isDriver
+                ? const BottomNavigationBarItem(
+                    icon: Icon(Icons.map_rounded), label: 'Modo conductor')
+                : const BottomNavigationBarItem(
+                    icon: Icon(Icons.home), label: 'Principal'),
+            const BottomNavigationBarItem(
+                icon: Icon(Icons.map_rounded), label: 'Viajar'),
+          ]),
     );
   }
 
