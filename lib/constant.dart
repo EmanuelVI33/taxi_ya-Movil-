@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 // Strings URL
-// const baseUrl = 'https://julicosuarez.ga/api';  // Proyecto Desplegado
-const url = 'http://192.168.0.103';
+// const baseUrl = 'https://julicosuarez.ga';  // Proyecto Desplegado
+const url = 'http://192.168.0.104:80';
 const baseUrl = '$url/api'; // Proyecto local, el host es su direcció ip
 const loginUrl = '$baseUrl/login';
 const registerUrl = '$baseUrl/register';
 const logoutUrl = "$baseUrl/logout";
 const userUrl = "$baseUrl/user";
 const userDetailUrl = "$baseUrl/user-detail";
+const solicitud = "$baseUrl/solicitud";
 
 // Errores
 const somethingWentWrong = 'Ha occurido un error, de nuevo';
@@ -92,7 +93,7 @@ Row KLoginRegisterHint(String text, String label, Function onTab) {
     children: [
       Text(
         text,
-        style: TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 18),
       ),
       const SizedBox(
         width: 10,

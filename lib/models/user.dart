@@ -37,7 +37,7 @@ class User {
         apellido: json['user']['apellido'],
         telefono: json['user']['telefono'],
         email: json['user']['email'],
-        isDriver: json['user']['is_driver'],
+        isDriver: json['user']['is_driver'] == null ? false : true,
         role: rolesStr,
         image: json['image'] ?? '',
         token: json['token']);

@@ -88,7 +88,7 @@ class UserProvider extends ChangeNotifier {
   get driverMode => _driverMode;
 
   void setUser(String id, String? nombre, String? apellido, String? telefono,
-      String? email, String? image, bool? isDriver) {
+      String? email, String? image, bool? isDriver, String? token) {
     _id = id;
     _nombre = nombre ?? 'Sin Nombre';
     _apellido = apellido ?? 'Sin Apellido';
@@ -96,20 +96,10 @@ class UserProvider extends ChangeNotifier {
     _email = email ?? 'No tiene email';
     _image = image ?? '';
     _isDriver = isDriver ?? false;
+    _token = token ?? '';
     notifyListeners();
   }
 
   bool existNull() =>
       _nombre == '' || _apellido == '' || _telefono == '' || _email == '';
-
-  // Future<void> loadingUser() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   _id = prefs.getString('userId')!;
-  //   _nombre = prefs.getString('userNombre')!;
-  //   _apellido = prefs.getString('userApellido')!;
-  //   _telefono = prefs.getString('userTelefono')!;
-  //   _email = prefs.getString('userEmail')!;
-  //   _image = prefs.getString('userImage')!;
-  //   _role = prefs.getStringList('userRole')!;
-  // }
 }

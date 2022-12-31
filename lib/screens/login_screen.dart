@@ -117,23 +117,24 @@ class _LoginForm extends StatelessWidget {
                           loginForm.email, loginForm.password);
 
                       if (response.error == null) {
-                        loginForm.isLoading = false;
                         final user = response.data as User;
+                        userProvider.setUser(
+                            user.id,
+                            user.nombre,
+                            user.apellido,
+                            user.telefono,
+                            user.email,
+                            user.image,
+                            user.isDriver,
+                            user.token);
 
-                        userProvider.id = user.id;
-                        userProvider.nombre = user.nombre;
-                        userProvider.apellido = user.apellido;
-                        userProvider.email = user.email;
-                        userProvider.telefono = user.telefono;
-                        userProvider.image = user.image;
-                        userProvider.token = user.token;
-
-                        await Future.delayed(const Duration(seconds: 2));
+                        await Future.delayed(const Duration(seconds: 1));
 
                         navigator.pushReplacementNamed('home');
                       } else {
-                        loginForm.isLoading = false;
+                        // Implemetar mensage de errores
                       }
+                      loginForm.isLoading = false;
                     },
               child: Container(
                   padding:

@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:taxi_ya/screens/request_service_screen.dart';
 import 'package:taxi_ya/screens/screens.dart';
 
 class HomeProvider extends ChangeNotifier {
@@ -7,7 +8,7 @@ class HomeProvider extends ChangeNotifier {
 
   final List<Widget> _pages = [
     const UserScreen(),
-    const RequestServiceScreen(),
+    RequestServiceScreen(),
   ];
 
   set actualPage(page) {

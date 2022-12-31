@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/screens/register_driver_screen.dart';
+import 'package:taxi_ya/screens/request_service_screen.dart';
 import 'package:taxi_ya/screens/screens.dart';
 import 'package:taxi_ya/services/services.dart';
 import 'package:taxi_ya/theme/app_theme.dart';
@@ -32,6 +33,9 @@ class _MyAppState extends State<MyApp> {
       ChangeNotifierProvider(
         create: (_) => UserService(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => RegisterDriver(),
+      ),
     ], child: const _MyApp());
   }
 }
@@ -52,9 +56,9 @@ class _MyApp extends StatelessWidget {
         'home': (_) => const HomeScreen(),
         'user': (_) => const UserScreen(),
         'driver': (_) => const DriverScreen(),
-        'register_driver': (_) => const RegisterDriverScreen(),
+        'register_driver': (_) => RegisterRequestScreen(),
         'register': (_) => const RegisterScreen(),
-        'service': (_) => const RequestServiceScreen(),
+        'service': (_) => RequestServiceScreen(),
         'travel_history': (_) => const TravelHistoryScreen(),
         'punctuation': (_) => const PunctationScreen(),
       },

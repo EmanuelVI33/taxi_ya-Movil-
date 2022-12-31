@@ -172,11 +172,11 @@ class _LoginForm extends StatelessWidget {
                           loginForm.password,
                           loginForm.passwordConfirmation);
 
-                      final user = response.data as User;
-
                       if (response.error == null) {
                         final userProvider =
                             Provider.of<UserProvider>(context, listen: false);
+
+                        final user = response.data as User;
 
                         userProvider.id = user.id;
                         userProvider.nombre = user.nombre;

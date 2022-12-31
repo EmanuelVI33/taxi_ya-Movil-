@@ -23,7 +23,7 @@ class _UserScreenState extends State<UserScreen> {
     if (response.error == null) {
       final user = response.data as User;
       userProvider.setUser(user.id, user.nombre, user.apellido, user.telefono,
-          user.email, user.image, user.isDriver);
+          user.email, user.image, user.isDriver, user.token);
     } else {
       Navigator.popAndPushNamed(context, 'login');
     }
@@ -70,7 +70,7 @@ class _UserScreenState extends State<UserScreen> {
                   print('$url/${userProvider.image}');
                 },
                 child: Text("Ver url imagen")),
-            (userProvider.image == null || userProvider.image == '')
+            (userProvider.image == '')
                 ? const Image(
                     image: AssetImage('assets/no-image.png'),
                     fit: BoxFit.cover,
