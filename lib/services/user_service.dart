@@ -88,7 +88,7 @@ class UserService extends ChangeNotifier {
 
     try {
       if (response.statusCode == 201) {
-        apiResponse.data = Request.fromJson(json.decode(response.body));
+        apiResponse.data = RequestDriver.fromJson(json.decode(response.body));
       } else {
         apiResponse.error = 'No tiene una solicitud registrada';
       }

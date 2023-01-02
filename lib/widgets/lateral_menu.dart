@@ -62,7 +62,8 @@ class LateralMenu extends StatelessWidget {
 
                           if (response.error == null) {
                             // Esta en espera o rechazada su solicitud
-                            Request request = response.data as Request;
+                            RequestDriver request =
+                                response.data as RequestDriver;
 
                             if (request.estado == 'E') {
                               displayDialog(
