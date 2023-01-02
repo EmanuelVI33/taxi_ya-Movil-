@@ -9,6 +9,7 @@ class UserProvider extends ChangeNotifier {
   String _image = "";
   List<String> _role = [];
   bool _isDriver = false;
+  bool _sentRequest = false;
   bool _driverMode = false;
   String _token = "";
   bool _loading = false;
@@ -95,8 +96,15 @@ class UserProvider extends ChangeNotifier {
     _telefono = telefono ?? 'No tiene Telefono';
     _email = email ?? 'No tiene email';
     _image = image ?? '';
-    _isDriver = isDriver ?? false;
+    _isDriver = isDriver!;
     _token = token ?? '';
+    notifyListeners();
+  }
+
+  get sentRequest => _sentRequest;
+
+  set sentRequest(request) {
+    _sentRequest = request;
     notifyListeners();
   }
 

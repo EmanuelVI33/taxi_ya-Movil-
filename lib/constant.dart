@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 // Strings URL
 // const baseUrl = 'https://julicosuarez.ga';  // Proyecto Desplegado
-const url = 'http://192.168.0.104:80';
-const baseUrl = '$url/api'; // Proyecto local, el host es su direcció ip
-const loginUrl = '$baseUrl/login';
-const registerUrl = '$baseUrl/register';
-const logoutUrl = "$baseUrl/logout";
-const userUrl = "$baseUrl/user";
-const userDetailUrl = "$baseUrl/user-detail";
-const solicitud = "$baseUrl/solicitud";
+const String url = 'http://192.168.0.104:80';
+const String baseUrl = '$url/api'; // Proyecto local, el host es su direcció ip
+const String loginUrl = '$baseUrl/login';
+const String registerUrl = '$baseUrl/register';
+const String logoutUrl = "$baseUrl/logout";
+const String userUrl = "$baseUrl/user";
+const String userDetailUrl = "$baseUrl/user-detail";
+const String solicitud = "$baseUrl/solicitud";
+const String solicitudEnvio = "$solicitud/envio";
 
 // Errores
 const somethingWentWrong = 'Ha occurido un error, de nuevo';
@@ -109,9 +110,11 @@ Row KLoginRegisterHint(String text, String label, Function onTab) {
   );
 }
 
-// AppBar
-AppBar MyAppBar(String title) {
-  return AppBar(
-    title: Text(title),
+Widget myText(String texto, double size, Color color, FontWeight weight) {
+  return Text(
+    texto,
+    textAlign: TextAlign.center,
+    maxLines: 1,
+    style: TextStyle(fontWeight: FontWeight.bold, fontSize: size, color: color),
   );
 }

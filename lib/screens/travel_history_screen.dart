@@ -6,9 +6,6 @@ class TravelHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar("Historial de Viajes"),
-      body: const Text("Historial de Viaje"),
-    );
+    return Scaffold();
   }
 }

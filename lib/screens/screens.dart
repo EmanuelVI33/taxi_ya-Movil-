@@ -1,3 +1,5 @@
+export 'package:taxi_ya/screens/add_card_screen.dart';
+export 'package:taxi_ya/screens/select_card_screen.dart';
 export 'package:taxi_ya/screens/check_auth_screen.dart';
 export 'package:taxi_ya/screens/driver_screen.dart';
 export 'package:taxi_ya/screens/home_screen.dart';

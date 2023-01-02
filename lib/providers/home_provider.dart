@@ -20,12 +20,6 @@ class HomeProvider extends ChangeNotifier {
 
   set isDriver(isDriver) {
     _isDriver = isDriver;
-    _pages.removeAt(0);
-    if (_isDriver) {
-      _pages.insert(0, const DriverScreen());
-    } else {
-      _pages.insert(0, const UserScreen());
-    }
     notifyListeners();
   }
 

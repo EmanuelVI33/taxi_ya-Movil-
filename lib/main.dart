@@ -60,6 +60,8 @@ class _MyApp extends StatelessWidget {
         'service': (_) => RequestServiceScreen(),
         'travel_history': (_) => const TravelHistoryScreen(),
         'punctuation': (_) => const PunctationScreen(),
+        'select_ car': (_) => const SelectCarScreen(),
+        'add_ car': (_) => const AddCarScreen(),
       },
       initialRoute: 'check',
       theme: AppTheme.lightTheme,

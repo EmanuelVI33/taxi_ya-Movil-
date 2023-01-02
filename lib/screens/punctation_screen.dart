@@ -6,7 +6,6 @@ class PunctationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: MyAppBar("Puntuación"), body: const Text("Puntuación "));
+    return Scaffold();
   }
 }
