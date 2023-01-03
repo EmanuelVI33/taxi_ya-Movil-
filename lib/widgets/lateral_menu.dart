@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/constant.dart' show displayDialog, myText;
 import 'package:taxi_ya/models/models.dart';
+import 'package:taxi_ya/models/vehiculo.dart';
 import 'package:taxi_ya/providers/providers.dart';
+import 'package:taxi_ya/providers/select_car_provider.dart';
 import 'package:taxi_ya/screens/screens.dart';
+import 'package:taxi_ya/services/cars_service.dart';
 import 'package:taxi_ya/services/services.dart';
 
 class LateralMenu extends StatelessWidget {
@@ -14,6 +17,8 @@ class LateralMenu extends StatelessWidget {
     final driverProvider = Provider.of<HomeProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
     final userService = Provider.of<UserService>(context);
+    final carsProvider = Provider.of<SelectCarProvider>(context);
+    final carsService = Provider.of<CarsService>(context);
 
     return Drawer(
       child: Container(
@@ -54,6 +59,21 @@ class LateralMenu extends StatelessWidget {
 
                             // Muestra el dialog y almacena si el usuario cambia a driver
                             displayDialogDriver(context, driverProvider);
+
+                            if (value) {
+                              // Modo conductor, traer los vehículos del conductor
+                              if (carsProvider.isNull()) {
+                                ApiResponse response =
+                                    await carsService.getCars();
+                                if (response.error == null) {
+                                  List<Vehiculo> list =
+                                      response.data as List<Vehiculo>;
+
+                                  carsProvider.cards = list;
+                                }
+                              }
+                            }
+
                             return;
                           }
 
@@ -83,6 +103,7 @@ class LateralMenu extends StatelessWidget {
                                   Icons.drive_eta_rounded);
                             } else {
                               userProvider.isDriver = true;
+                              print(userProvider.isDriver);
 
                               displayDialogAccept(
                                   context,
@@ -297,7 +318,9 @@ void displayDialogAccept(BuildContext context, String titulo, String content,
             ]),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pushReplacementNamed(context, 'home'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'home');
+            },
             child: Text(message),
           ),
           TextButton(

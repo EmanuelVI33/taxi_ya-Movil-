@@ -118,3 +118,9 @@ Widget myText(String texto, double size, Color color, FontWeight weight) {
     style: TextStyle(fontWeight: FontWeight.bold, fontSize: size, color: color),
   );
 }
+
+AppBar myAppBar(String text) {
+  return AppBar(
+    title: myText(text, 18, Colors.white, FontWeight.bold),
+  );
+}

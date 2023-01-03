@@ -75,7 +75,7 @@ class UserProvider extends ChangeNotifier {
   get image => _image;
 
   set isDriver(isDriver) {
-    _driverMode = isDriver;
+    _isDriver = isDriver;
     notifyListeners();
   }
 

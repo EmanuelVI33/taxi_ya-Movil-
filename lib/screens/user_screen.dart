@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/constant.dart';
+import 'package:taxi_ya/models/vehiculo.dart';
 import 'package:taxi_ya/providers/providers.dart';
+import 'package:taxi_ya/providers/select_car_provider.dart';
 import 'package:taxi_ya/services/services.dart';
 
 class UserScreen extends StatefulWidget {
@@ -40,10 +42,79 @@ Widget screenUser(BuildContext context, UserProvider userProvider) {
         _iconoPasajero(context, userProvider, size, driver),
         _datosUser(context, userProvider, size),
         _accesoDirectos(context, userProvider, size, driver),
+        driver
+            ? _vehiculoSeleccionado(context, userProvider, size, driver)
+            : const SizedBox(),
         // Diseño estrellas
       ],
     ),
   );
+}
+
+Widget _vehiculoSeleccionado(
+    BuildContext context, UserProvider userProvider, Size size, driver) {
+  final carsProvider = Provider.of<SelectCarProvider>(context);
+  List<Vehiculo> cars = carsProvider.cards;
+  int select = carsProvider.selectCar;
+
+  return (Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+    decoration: BoxDecoration(
+        color: Colors.indigo, borderRadius: BorderRadius.circular(20)),
+    child: Column(
+      children: [
+        myText('Vehículo', 16, Colors.white, FontWeight.bold),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.indigo[900],
+                borderRadius: BorderRadius.circular(15),
+              ),
+              width: size.width / 2.5,
+              child: FadeInImage(
+                placeholder: const AssetImage('assets/jar-loading.gif'),
+                image: AssetImage(cars[select].fotoVehiculo),
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+              color: Colors.indigo,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  myText('Placa: ${cars[select].placa}', 14, Colors.white,
+                      FontWeight.normal),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  myText('Marca: ${cars[select].marca}', 14, Colors.white,
+                      FontWeight.normal),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  cars[select].estado == 'H'
+                      ? myText('Habilitado', 14, Colors.green, FontWeight.bold)
+                      : myText(
+                          'Desahabilitado', 14, Colors.red, FontWeight.bold),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ));
 }
 
 Widget _accesoDirectos(
@@ -175,10 +246,14 @@ Container _iconoPasajero(
     BuildContext context, UserProvider userProvider, Size size, bool driver) {
   return Container(
     margin: const EdgeInsets.only(top: 20),
+    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+    decoration: BoxDecoration(
+        color: Colors.white, borderRadius: BorderRadius.circular(15)),
     child: Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               driver ? Icons.drive_eta : Icons.person_pin,
@@ -188,8 +263,10 @@ Container _iconoPasajero(
               width: 30,
             ),
             Text(driver ? 'Modo Conductor' : 'Modo Pasajero',
-                style:
-                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey[900])),
             const SizedBox(
               width: 30,
             ),
@@ -209,16 +286,19 @@ Column _parteSuperior(
         height: 10,
       ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
+          Text(
             'Foto de Perfil',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.lightBlue[900]),
           ),
           IconButton(
             icon: const Icon(Icons.edit),
             color: Colors.black,
-            iconSize: 35,
+            iconSize: 25,
             onPressed: () {},
           ),
         ],
@@ -233,12 +313,12 @@ Column _parteSuperior(
         width: size.width / 1.35,
         child: (userProvider.image == '')
             ? const Image(
-                image: AssetImage('assets/emanuel.jpeg'),
+                image: AssetImage('assets/user.jpg'),
                 fit: BoxFit.cover,
                 height: 300,
               )
             : FadeInImage(
-                placeholder: const AssetImage('assets/no-image.png'),
+                placeholder: const AssetImage('assets/jar-loading.gif'),
                 image: NetworkImage('$url/${userProvider.image}'),
                 fit: BoxFit.cover, // Para que se ajuste la imagen a la altura
                 fadeInDuration: const Duration(

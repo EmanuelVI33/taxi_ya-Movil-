@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
+import 'package:taxi_ya/providers/select_car_provider.dart';
 import 'package:taxi_ya/screens/register_driver_screen.dart';
 import 'package:taxi_ya/screens/screens.dart';
 import 'package:taxi_ya/services/services.dart';
@@ -35,6 +36,18 @@ class _MyAppState extends State<MyApp> {
       ChangeNotifierProvider(
         create: (_) => RegisterDriver(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => SelectCarProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => CarsService(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => SelectCarProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => RegisterCarProvider(),
+      ),
     ], child: const _MyApp());
   }
 }
@@ -61,7 +74,7 @@ class _MyApp extends StatelessWidget {
         'travel_history': (_) => const TravelHistoryScreen(),
         'punctuation': (_) => const PunctationScreen(),
         'select_ car': (_) => const SelectCarScreen(),
-        'add_ car': (_) => const AddCarScreen(),
+        'add_car': (_) => AddCarScreen(),
       },
       initialRoute: 'check',
       theme: AppTheme.lightTheme,

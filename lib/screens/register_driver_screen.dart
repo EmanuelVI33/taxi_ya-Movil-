@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -218,6 +217,7 @@ class RegisterRequestScreen extends StatelessWidget {
                             print(registerDriver.imagenDriver['ciAnverso'].path
                                 .split('/')
                                 .last);
+                            print(registerDriver.placa);
                             registerDriver.isLoading = true;
                             final register = Provider.of<RegisterDriver>(
                                 context,
@@ -232,10 +232,10 @@ class RegisterRequestScreen extends StatelessWidget {
                                 registerDriver.modelo);
 
                             response.error == null
-                                ? displayDialog(context,
-                                    'Solicitud registrada corectamente', true)
+                                ? displayDialog(
+                                    context, 'Vehículo registrado', true)
                                 : displayDialog(context,
-                                    'Error al registrar la solicitud', false);
+                                    'Error al registrar vehículo', false);
 
                             registerDriver.isLoading = false;
                           },

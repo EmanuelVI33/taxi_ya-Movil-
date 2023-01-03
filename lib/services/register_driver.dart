@@ -52,30 +52,6 @@ class RegisterDriver extends ChangeNotifier {
           apiResponse.data = 'Error al enviar la solicitud';
         }
       });
-
-      // final response = await http.post(Uri.parse(solicitud), headers: {
-      //   'Accept': 'application/json',
-      //   'Authorization': 'Bearer $token'
-      // }, body: {
-      //   'ci': ci,
-      //   'foto': imagen['foto'],
-      //   'fotoCI_Anverso': imagen['ciAnverso'],
-      //   'fotoCI_Reverso': imagen['ciReverso'],
-      //   'fotoAntecedentes': imagen['fotoAntedentes'],
-      //   'fotoLicencia': imagen['fotoLicencia'],
-      //   'fotoTIC': imagen['fotoTIC'],
-      //   // Vehiculo
-      //   'placa': placa,
-      //   'anio': anio,
-      //   'marca': marca,
-      //   'modelo': modelo,
-      //   'fotoPapelesAuto': imagen['fotoPapelesAuto'].toString(),
-      //   'fotoVehiculo': imagen['fotoVehiculo'].toString(),
-      // });
-
-      // if (response.statusCode != 201) {
-      //   apiResponse.error = "Ha ocurrido un error";
-      // }
     } catch (e) {
       apiResponse.error = "Ha ocurrido un error";
     }
