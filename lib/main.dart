@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
-import 'package:taxi_ya/providers/select_car_provider.dart';
 import 'package:taxi_ya/screens/register_driver_screen.dart';
 import 'package:taxi_ya/screens/screens.dart';
 import 'package:taxi_ya/services/services.dart';
@@ -47,6 +46,12 @@ class _MyAppState extends State<MyApp> {
       ),
       ChangeNotifierProvider(
         create: (_) => RegisterCarProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => CarreraService(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => HistoryProvider(),
       ),
     ], child: const _MyApp());
   }

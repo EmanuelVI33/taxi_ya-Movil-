@@ -25,10 +25,11 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     List<String> rolesStr = [];
-    List roles = json['user']['role'];
-
-    for (var elem in roles) {
-      rolesStr.add(elem.toString());
+    if (json['user']['role'] != null) {
+      List roles = json['user']['role'];
+      for (var elem in roles) {
+        rolesStr.add(elem.toString());
+      }
     }
 
     return User(

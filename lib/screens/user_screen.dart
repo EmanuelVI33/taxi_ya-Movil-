@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taxi_ya/constant.dart';
+import 'package:taxi_ya/models/api_response.dart';
+import 'package:taxi_ya/models/carrera.dart';
 import 'package:taxi_ya/models/vehiculo.dart';
+import 'package:taxi_ya/providers/history_provider.dart';
 import 'package:taxi_ya/providers/providers.dart';
 import 'package:taxi_ya/providers/select_car_provider.dart';
+import 'package:taxi_ya/services/carrera_service.dart';
 import 'package:taxi_ya/services/services.dart';
 
 class UserScreen extends StatefulWidget {
@@ -133,8 +137,12 @@ Widget _accesoDirectos(
               size,
               driver ? 'select_ car' : 'service',
               context),
-          columnText('Historial de Viaje', Icons.account_balance_wallet_rounded,
-              size, 'travel_history', context),
+          columnHistory(
+              'Historial de Viaje',
+              Icons.account_balance_wallet_rounded,
+              size,
+              'travel_history',
+              context),
         ],
       ),
       Row(
@@ -152,6 +160,44 @@ Widget _accesoDirectos(
         ],
       ),
     ],
+  );
+}
+
+Widget columnHistory(
+    String text, IconData icon, Size size, String route, BuildContext context) {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+    padding: const EdgeInsets.all(10),
+    width: size.width / 2.50,
+    decoration: BoxDecoration(
+        color: Colors.white, borderRadius: BorderRadius.circular(30)),
+    child: TextButton(
+      onPressed: () async {
+        final carreraService =
+            Provider.of<CarreraService>(context, listen: false);
+        final userId = Provider.of<UserProvider>(context, listen: false).id;
+        final history = Provider.of<HistoryProvider>(context, listen: false);
+
+        ApiResponse response = await carreraService.get(userId);
+        if (response.error == null) {
+          history.carreras = response.data as List<Carrera>;
+        }
+
+        Navigator.pushNamed(context, route);
+      },
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            size: 30,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          myText(text, 10, Colors.black, FontWeight.normal),
+        ],
+      ),
+    ),
   );
 }
 
